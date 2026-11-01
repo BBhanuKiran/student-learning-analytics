@@ -1,0 +1,26 @@
+{
+  "enrollments": 100000,
+  "completion_rate_all": 0.2988,
+  "outcome_status_share": {
+    "not_completed": 0.6345,
+    "completed": 0.2988,
+    "in_progress": 0.0667
+  },
+  "engagement_band_share": {
+    "high": 0.4044,
+    "medium": 0.3223,
+    "low": 0.1599,
+    "inactive": 0.1134
+  },
+  "cohorts_in_comparison": 1098,
+  "window_weeks": 8,
+  "mean_avg_weekly_active_rate": 0.5168,
+  "by_delivery_mode": {
+    "instructor_led": 0.5216,
+    "self_paced": 0.512
+  },
+  "mean_completion_rate_closed_cohorts": 0.3174,
+  "event_inflation_overall_pct": 2.459,
+  "pipeline_metrics_match_ground_truth_metrics": true,
+  "weeks_with_active_count_error_if_naive": 1099
+}

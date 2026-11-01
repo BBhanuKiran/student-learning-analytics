@@ -1,0 +1,17 @@
+erDiagram
+    instructors ||--o{ courses : has
+    courses ||--o{ cohorts : has
+    learners ||--o{ enrollments : has
+    courses ||--o{ enrollments : has
+    cohorts ||--o{ enrollments : has
+    enrollments ||--|{ enrollment_status_history : has
+    courses ||--|{ content_items : has
+    content_items |o--o{ content_items : has
+    content_items ||--o| assessments : has
+    enrollments ||--o{ attempts : has
+    assessments ||--o{ attempts : has
+    courses ||--|{ completion_rules : has
+    enrollments ||--o{ activity_events : has
+    attempts |o--o{ activity_events : has
+    enrollments ||--|| course_outcomes : has
+    completion_rules ||--o{ course_outcomes : has

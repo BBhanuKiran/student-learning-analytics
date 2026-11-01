@@ -1,0 +1,119 @@
+{
+  "scale": "full",
+  "seed": 20261022,
+  "files": {
+    "data/learners.csv": {
+      "rows_run1": 20000,
+      "rows_run2": 20000,
+      "sha256_run1": "a2551513da5f44aea184337babfecfceec07a9e4451cc7c6af2f835fbeba9a7f",
+      "sha256_run2": "a2551513da5f44aea184337babfecfceec07a9e4451cc7c6af2f835fbeba9a7f",
+      "match": true
+    },
+    "data/instructors.csv": {
+      "rows_run1": 100,
+      "rows_run2": 100,
+      "sha256_run1": "c25916a36290cb987e68e2dcd64b3f04ef0e56f3e790a6624f39e2677daed2d0",
+      "sha256_run2": "c25916a36290cb987e68e2dcd64b3f04ef0e56f3e790a6624f39e2677daed2d0",
+      "match": true
+    },
+    "data/courses.csv": {
+      "rows_run1": 500,
+      "rows_run2": 500,
+      "sha256_run1": "a22d20addbeb3d00e33cef3ff9d591c9385054ae083c4eaa96a7df40be701443",
+      "sha256_run2": "a22d20addbeb3d00e33cef3ff9d591c9385054ae083c4eaa96a7df40be701443",
+      "match": true
+    },
+    "data/cohorts.csv": {
+      "rows_run1": 1160,
+      "rows_run2": 1160,
+      "sha256_run1": "b7e73f9a5c71c6410a4b08118d0f8af4b28955beb114ff414cb36186094c81b7",
+      "sha256_run2": "b7e73f9a5c71c6410a4b08118d0f8af4b28955beb114ff414cb36186094c81b7",
+      "match": true
+    },
+    "data/enrollments.csv": {
+      "rows_run1": 100000,
+      "rows_run2": 100000,
+      "sha256_run1": "be9563fde60def598046782210cd3eb8bb1fae4144394acf4dc2e01cc13d0db7",
+      "sha256_run2": "be9563fde60def598046782210cd3eb8bb1fae4144394acf4dc2e01cc13d0db7",
+      "match": true
+    },
+    "data/enrollment_status_history.csv": {
+      "rows_run1": 282060,
+      "rows_run2": 282060,
+      "sha256_run1": "de9d8e82e255d24271e116fecfe61f3523b2b482ed36ebb7e65af7e0181fa698",
+      "sha256_run2": "de9d8e82e255d24271e116fecfe61f3523b2b482ed36ebb7e65af7e0181fa698",
+      "match": true
+    },
+    "data/content_items.csv": {
+      "rows_run1": 9741,
+      "rows_run2": 9741,
+      "sha256_run1": "1e85946d1e8df9a5ccc80e741d77428a46b0cd406bb3475a4330732d1f3a1cf5",
+      "sha256_run2": "1e85946d1e8df9a5ccc80e741d77428a46b0cd406bb3475a4330732d1f3a1cf5",
+      "match": true
+    },
+    "data/assessments.csv": {
+      "rows_run1": 2792,
+      "rows_run2": 2792,
+      "sha256_run1": "bd0578ddb2a5eef482c4d34e9b4d798ae70507cce0fa4a865d8734d215371fcb",
+      "sha256_run2": "bd0578ddb2a5eef482c4d34e9b4d798ae70507cce0fa4a865d8734d215371fcb",
+      "match": true
+    },
+    "data/attempts.csv": {
+      "rows_run1": 397188,
+      "rows_run2": 397188,
+      "sha256_run1": "d1dcec2222347571df2a05b69a0737ee938aa58f3e76a1ecdb71c25bd2a5d8fb",
+      "sha256_run2": "d1dcec2222347571df2a05b69a0737ee938aa58f3e76a1ecdb71c25bd2a5d8fb",
+      "match": true
+    },
+    "data/completion_rules.csv": {
+      "rows_run1": 617,
+      "rows_run2": 617,
+      "sha256_run1": "278d4201339cf2e7ae1c6428bfb3e44a0b8d4d53597400153ca73891670d849c",
+      "sha256_run2": "278d4201339cf2e7ae1c6428bfb3e44a0b8d4d53597400153ca73891670d849c",
+      "match": true
+    },
+    "data/activity_events.csv": {
+      "rows_run1": 2000000,
+      "rows_run2": 2000000,
+      "sha256_run1": "7208e18a22e46504cc21d5d7df332647d37eec155441e44b7c2a7494e406406b",
+      "sha256_run2": "7208e18a22e46504cc21d5d7df332647d37eec155441e44b7c2a7494e406406b",
+      "match": true
+    },
+    "data/course_outcomes.csv": {
+      "rows_run1": 100000,
+      "rows_run2": 100000,
+      "sha256_run1": "f7408990b69ab55a1cfe81b328ebd6bcb8a452d891a326f52226f515ec66dc6e",
+      "sha256_run2": "f7408990b69ab55a1cfe81b328ebd6bcb8a452d891a326f52226f515ec66dc6e",
+      "match": true
+    },
+    "ground_truth/ground_truth.csv": {
+      "rows_run1": 81243,
+      "rows_run2": 81243,
+      "sha256_run1": "1202864d7c0d97093ae282ab20bf1a011a6598aa5399805964bc5903144f0790",
+      "sha256_run2": "1202864d7c0d97093ae282ab20bf1a011a6598aa5399805964bc5903144f0790",
+      "match": true
+    },
+    "ground_truth/latent_learner_traits.csv": {
+      "rows_run1": 20000,
+      "rows_run2": 20000,
+      "sha256_run1": "246384d6767163564ab3898895a7f75fe4a5e49333ae81d505997676f5cb8fa7",
+      "sha256_run2": "246384d6767163564ab3898895a7f75fe4a5e49333ae81d505997676f5cb8fa7",
+      "match": true
+    },
+    "ground_truth/expected_weekly_metrics.csv": {
+      "rows_run1": 11302,
+      "rows_run2": 11302,
+      "sha256_run1": "fd947fe75b5ce240cf1f2a6a3a0c879356fcd6ff8a942beb821004d8b5a9104b",
+      "sha256_run2": "fd947fe75b5ce240cf1f2a6a3a0c879356fcd6ff8a942beb821004d8b5a9104b",
+      "match": true
+    },
+    "ground_truth/ground_truth_summary.json": {
+      "rows_run1": 6,
+      "rows_run2": 6,
+      "sha256_run1": "4e68b02a4913479cd6a64c4aee93c6fd8b4069df16c32b3e56ec61727c78b560",
+      "sha256_run2": "4e68b02a4913479cd6a64c4aee93c6fd8b4069df16c32b3e56ec61727c78b560",
+      "match": true
+    }
+  },
+  "identical": true
+}

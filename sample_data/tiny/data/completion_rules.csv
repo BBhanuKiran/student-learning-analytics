@@ -1,0 +1,12 @@
+rule_id,course_id,rule_version,effective_from,effective_to,min_required_content_pct,min_weighted_score_pct,grace_days_after_end,rule_status
+CRL-000001,CRS-000001,1,2026-01-01,,90,65,14,active
+CRL-000002,CRS-000002,1,2026-01-01,,80,60,14,active
+CRL-000003,CRS-000003,1,2026-01-01,2026-04-30,80,65,14,superseded
+CRL-000004,CRS-000003,2,2026-05-01,,90,70,14,active
+CRL-000005,CRS-000004,1,2026-01-01,,90,60,14,active
+CRL-000006,CRS-000005,1,2026-01-01,,100,60,14,active
+CRL-000007,CRS-000006,1,2026-01-01,,90,60,14,active
+CRL-000008,CRS-000007,1,2026-01-01,,80,60,14,active
+CRL-000009,CRS-000008,1,2026-01-01,,80,65,14,active
+CRL-000010,CRS-000009,1,2026-01-01,,90,60,14,active
+CRL-000011,CRS-000010,1,2026-01-01,,80,60,14,active

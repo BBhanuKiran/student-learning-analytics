@@ -1,0 +1,133 @@
+table,name,type,required,allowed,unit,unique,rule
+learners,learner_id,string,True,LRN-######,,True,regex ^LRN-\d{6}$; immutable
+learners,signup_date,date,True,2025-09-01..2026-04-15,date,False,<= first enrolment date - 1 day
+learners,country_code,string,True,ISO-3166 alpha-2 (ZZ = unknown/UTC),,False,consistent with timezone
+learners,timezone,string,True,IANA tz name,,False,valid IANA zone; drives local-date derivation
+learners,preferred_device,enum,True,"{web, ios, android}",,False,enum
+learners,age_band,enum,True,"{18-24, 25-34, 35-44, 45+}",,False,enum
+learners,signup_channel,enum,True,"{organic, employer, university, referral}",,False,enum
+learners,account_status,enum,True,"{active, closed}",,False,closed accounts have no activity
+instructors,instructor_id,string,True,INS-####,,True,regex ^INS-\d{4}$
+instructors,department,string,True,free text (10 categories),,False,
+instructors,joined_date,date,True,2018-01-01..2025-12-31,date,False,
+courses,course_id,string,True,CRS-######,,True,regex ^CRS-\d{6}$
+courses,title,string,True,,,True,non-empty
+courses,category,string,True,10 categories,,False,
+courses,level,enum,True,"{beginner, intermediate, advanced}",,False,enum
+courses,language,string,True,en|hi|es|pt,,False,
+courses,duration_weeks,int,True,6|8|10,weeks,False,= cohort (end_date-start_date+1)/7
+courses,instructor_id,string,True,FK instructors,,False,must exist
+courses,course_status,enum,True,"{draft, published, archived}",,False,draft => no cohorts/enrolments; archived => all cohorts closed
+courses,created_date,date,True,2025-01-01..2025-12-31,date,False,before first cohort start
+cohorts,cohort_id,string,True,COH-######,,True,regex ^COH-\d{6}$
+cohorts,course_id,string,True,FK courses,,False,"must exist, course not draft"
+cohorts,cohort_code,string,True,<course_id>-<YYYY>W<ww>,,True,unique
+cohorts,start_date,date,True,Mondays 2026-01-05..2026-09-14,date,False,start_date <= end_date < access_end_date
+cohorts,end_date,date,True,,date,False,= start_date + duration_weeks*7 - 1
+cohorts,access_end_date,date,True,,date,False,= end_date + grace_days (14); events after it are invalid
+cohorts,delivery_mode,enum,True,"{instructor_led, self_paced}",,False,enum
+cohorts,capacity,int,True,40..400,learners,False,>= 1
+cohorts,cohort_status,enum,True,"{running, closed}",,False,closed iff access_end_date < as_of date
+enrollments,enrollment_id,string,True,ENR-<learner_id>-<course_id>,,True,= 'ENR-'+learner_id+'-'+course_id; one per learner/course
+enrollments,learner_id,string,True,FK learners,,False,must exist
+enrollments,course_id,string,True,FK courses,,False,must exist; = cohort.course_id
+enrollments,cohort_id,string,True,FK cohorts,,False,must exist
+enrollments,enrolled_at,timestamp,True,ISO-8601 UTC,UTC,False,>= signup_date+1d; <= cohort start+10d
+enrollments,enrollment_source,enum,True,"{self_enrol, employer_assigned, admin_import}",,False,enum
+enrollments,current_status,enum,True,"{enrolled, active, completed, dropped, expired}",,False,= to_status of latest history row
+enrollments,status_updated_at,timestamp,True,ISO-8601 UTC,UTC,False,= changed_at of latest history row
+enrollment_status_history,history_id,string,True,ESH-<enrollment_id>-NN,,True,NN = 1-based sequence per enrollment
+enrollment_status_history,enrollment_id,string,True,FK enrollments,,False,must exist
+enrollment_status_history,from_status,enum,False,"{enrolled, active, completed, dropped, expired} or null",,False,null only for first row
+enrollment_status_history,to_status,enum,True,"{enrolled, active, completed, dropped, expired}",,False,transition must be in LEGAL_TRANSITIONS
+enrollment_status_history,changed_at,timestamp,True,ISO-8601 UTC,UTC,False,non-decreasing per enrollment; <= as_of
+enrollment_status_history,changed_by,enum,True,"{learner, system, admin}",,False,enum
+enrollment_status_history,reason_code,string,True,enrollment_created|first_activity|completion_rule_met|learner_request|inactivity_21d|access_window_closed,,False,
+content_items,content_id,string,True,CNT-#######,,True,regex ^CNT-\d{7}$
+content_items,course_id,string,True,FK courses,,False,must exist
+content_items,parent_content_id,string,False,FK content_items (self) or null,,False,null iff hierarchy_level=1; parent must be same course
+content_items,content_type,enum,True,"{module, video, reading, discussion, quiz, assignment, final_exam}",,False,module only at level 1
+content_items,title,string,True,,,False,
+content_items,hierarchy_level,int,True,1|2,,False,
+content_items,sequence_no,int,True,>=1,,False,order within parent
+content_items,course_order,int,True,>=1,,False,global order within course; unique per course
+content_items,week_number,int,True,1..duration_weeks,week,False,= release_offset_days//7+1
+content_items,release_offset_days,int,True,>=0,days after cohort start,False,unlock time
+content_items,is_required,bool,True,true|false,,False,video/reading always true; discussion false; assessments follow assessments.is_required
+content_items,est_minutes,int,True,5..120,minutes,False,>0
+content_items,content_status,enum,True,"{draft, published}",,False,draft iff course draft
+assessments,assessment_id,string,True,ASM-2026-######,,True,regex ^ASM-2026-\d{6}$
+assessments,course_id,string,True,FK courses,,False,must exist
+assessments,content_id,string,True,FK content_items,,True,"1:1; content_type in {quiz, assignment, final_exam}"
+assessments,assessment_type,enum,True,"{quiz, assignment, final_exam}",,False,= content_type
+assessments,title,string,True,,,False,
+assessments,max_score,int,True,"quiz 20, assignment 50, final_exam 100",points,False,>0
+assessments,pass_score,int,True,ceil(max_score*pass_pct),points,False,0 < pass_score <= max_score
+assessments,weight_pct,int,True,1..60,percent,False,weights of a course sum to exactly 100
+assessments,is_required,bool,True,true|false,,False,final_exam always true
+assessments,max_attempts,int,True,"quiz 3, assignment 2, final_exam 2",attempts,False,>=1
+assessments,time_limit_min,int,False,"quiz 20, final_exam 90, assignment null",minutes,False,
+assessments,available_offset_days,int,True,>=0,days after cohort start,False,<= due_offset_days
+assessments,due_offset_days,int,True,,days after cohort start,False,<= duration_weeks*7-1
+assessments,assessment_status,enum,True,"{draft, published}",,False,draft iff course draft
+attempts,attempt_id,string,True,ATT-########,,True,regex ^ATT-\d{8}$
+attempts,enrollment_id,string,True,FK enrollments,,False,must exist
+attempts,assessment_id,string,True,FK assessments,,False,assessment.course_id = enrolment.course_id
+attempts,attempt_no,int,True,1..max_attempts,,False,"contiguous per (enrollment, assessment)"
+attempts,started_at,timestamp,True,ISO-8601 UTC,UTC,False,> enrolled_at; < access end
+attempts,submitted_at,timestamp,False,ISO-8601 UTC or null,UTC,False,>= started_at; null iff abandoned
+attempts,score,float,False,0..max_score step 0.5,points,False,null iff abandoned
+attempts,max_score,int,True,,points,False,= assessment.max_score
+attempts,percent_score,float,False,0..100,percent,False,"= round(score/max_score*100, 2)"
+attempts,passed,bool,False,true|false|null,,False,= score >= assessment.pass_score; null iff abandoned
+attempts,is_late,bool,True,true|false,,False,true iff submitted after due date end (UTC)
+attempts,attempt_status,enum,True,"{submitted, abandoned}",,False,enum
+attempts,duration_sec,int,False,>=0,seconds,False,= submitted_at - started_at; null iff abandoned
+completion_rules,rule_id,string,True,CRL-######,,True,regex ^CRL-\d{6}$
+completion_rules,course_id,string,True,FK courses,,False,must exist
+completion_rules,rule_version,int,True,1|2,,False,unique per course
+completion_rules,effective_from,date,True,,date,False,"rule applies to cohorts with start_date in [from, to]"
+completion_rules,effective_to,date,False,date or null (open-ended),date,False,no gaps/overlaps between versions of a course
+completion_rules,min_required_content_pct,int,True,80|90|100,percent,False,share of REQUIRED video/reading items with a completion event
+completion_rules,min_weighted_score_pct,int,True,60..75,percent,False,sum(weight*best_percent)/sum(weight)
+completion_rules,grace_days_after_end,int,True,14,days,False,= cohort.access_end_date - end_date
+completion_rules,rule_status,enum,True,"{active, superseded}",,False,superseded iff effective_to not null
+activity_events,event_id,string,True,EVT-<enrollment_id>-######,,True,prefix = enrollment_id; seq reflects insertion order
+activity_events,enrollment_id,string,True,FK enrollments (logical),,False,violations are labelled in ground truth (unenrolled_activity)
+activity_events,learner_id,string,True,FK learners,,False,must exist
+activity_events,course_id,string,True,FK courses,,False,must exist
+activity_events,content_id,string,False,FK content_items or null,,False,null for session_start
+activity_events,attempt_id,string,False,FK attempts or null,,False,only for assessment_start/submit
+activity_events,event_type,enum,True,"{session_start, content_view, video_play, video_complete, content_complete, assessment_start, assessment_submit, discussion_post, resource_download}",,False,enum
+activity_events,event_time_utc,timestamp,True,"ISO-8601 UTC (device clock, offline-safe)",UTC,False,<= ingested_at_utc
+activity_events,ingested_at_utc,timestamp,True,ISO-8601 UTC,UTC,False,>= event_time_utc; <= as_of
+activity_events,client_tz_offset_min,int,True,-720..840,minutes,False,UTC offset of the learner at event time
+activity_events,reported_activity_date,date,True,YYYY-MM-DD,date,False,ETL-assigned day; should equal date(event_time_utc+offset)
+activity_events,device_type,enum,True,"{web, ios, android}",,False,enum
+activity_events,source,enum,True,"{online, offline_sync}",,False,"offline_sync => queued on device, uploaded later"
+activity_events,duration_sec,int,False,>=0,seconds,False,session length / watch time / assessment time
+activity_events,client_event_key,string,True,CK-<16 hex>,,False,client idempotency key; duplicates share it; dedup key
+course_outcomes,outcome_id,string,True,OUT-<enrollment_id>,,True,1:1 with enrolment
+course_outcomes,enrollment_id,string,True,FK enrollments,,True,unique
+course_outcomes,learner_id,string,True,FK learners,,False,
+course_outcomes,course_id,string,True,FK courses,,False,
+course_outcomes,cohort_id,string,True,FK cohorts,,False,
+course_outcomes,rule_id,string,True,FK completion_rules,,False,rule effective at cohort start_date
+course_outcomes,evaluated_at,timestamp,True,as-of end of day UTC,UTC,False,= as_of 23:59:59Z
+course_outcomes,required_content_items_total,int,True,>=1,items,False,count of required video/reading items in course
+course_outcomes,required_content_items_completed,int,True,0..total,items,False,distinct required items with a completion event
+course_outcomes,content_completion_pct,float,True,0..100,percent,False,= completed/total*100
+course_outcomes,required_assessments_total,int,True,>=1,items,False,
+course_outcomes,required_assessments_passed,int,True,0..total,items,False,distinct required assessments with a passing attempt
+course_outcomes,weighted_score_pct,float,True,0..100,percent,False,sum(weight*best_percent)/sum(weight); unattempted = 0
+course_outcomes,total_attempts,int,True,>=0,,False,= count of attempts rows
+course_outcomes,valid_event_count,int,True,>=0,,False,"deduplicated, enrolled events"
+course_outcomes,active_days,int,True,>=0,days,False,distinct local dates with a valid event
+course_outcomes,active_weeks,int,True,>=0,weeks,False,distinct cohort-relative weeks with a valid event
+course_outcomes,first_activity_at,timestamp,False,,UTC,False,null iff no events
+course_outcomes,last_activity_at,timestamp,False,,UTC,False,null iff no events
+course_outcomes,completion_status,enum,True,"{completed, in_progress, not_completed}",,False,completed iff all three CompletionRule thresholds met
+course_outcomes,completed_at,timestamp,False,,UTC,False,max of the three conditions' first-satisfied times; null unless completed
+course_outcomes,completed_date_local,date,False,,date,False,learner-local date of completed_at
+course_outcomes,days_to_complete,float,False,>=0,days,False,completed_at - enrolled_at
+course_outcomes,engagement_band,enum,True,"{inactive, low, medium, high}",,False,inactive iff valid_event_count=0 else by active_weeks share

@@ -1,0 +1,28 @@
+{
+  "external_data_used": false,
+  "note": "All data is synthetic and generated from code + seed. No external datasets were downloaded, so no license/attribution obligations apply.",
+  "sources": [],
+  "schema_inspiration": [
+    {
+      "name": "xAPI / IEEE 9274.1.1 statements",
+      "url": "https://xapi.com/specification/",
+      "used_for": "event verb/object modelling ideas only",
+      "data_retrieved": false
+    },
+    {
+      "name": "IMS Caliper Analytics",
+      "url": "https://www.imsglobal.org/activity/caliper",
+      "used_for": "event naming ideas only",
+      "data_retrieved": false
+    }
+  ],
+  "fields_for_external_records": [
+    "source_url",
+    "dataset_version",
+    "retrieval_date",
+    "license",
+    "attribution",
+    "transformations",
+    "fields_discarded"
+  ]
+}

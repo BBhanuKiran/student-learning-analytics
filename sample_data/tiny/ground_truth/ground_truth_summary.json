@@ -1,0 +1,36 @@
+{
+  "rows": 815,
+  "by_issue_type": [
+    {
+      "issue_type": "completion_before_required_assessment",
+      "label_class": "injected_anomaly",
+      "n": 12
+    },
+    {
+      "issue_type": "duplicate_event",
+      "label_class": "injected_anomaly",
+      "n": 400
+    },
+    {
+      "issue_type": "inactive_learner",
+      "label_class": "expected_edge_case",
+      "n": 22
+    },
+    {
+      "issue_type": "late_arriving_event",
+      "label_class": "expected_edge_case",
+      "n": 203
+    },
+    {
+      "issue_type": "timezone_day_shift",
+      "label_class": "injected_anomaly",
+      "n": 98
+    },
+    {
+      "issue_type": "unenrolled_activity",
+      "label_class": "injected_anomaly",
+      "n": 80
+    }
+  ],
+  "note": "Ground truth is NEVER part of the input tables. Detectors/validators may read it only for scoring."
+}

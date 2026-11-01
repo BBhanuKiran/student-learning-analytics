@@ -1,0 +1,42 @@
+{
+  "duplicate_event": {
+    "truth": 40000,
+    "detected": 40000,
+    "true_positive": 40000,
+    "false_positive": 0,
+    "false_negative": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "unenrolled_activity": {
+    "truth": 8000,
+    "detected": 8000,
+    "true_positive": 8000,
+    "false_positive": 0,
+    "false_negative": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "timezone_day_shift": {
+    "truth": 9760,
+    "detected": 9760,
+    "true_positive": 9760,
+    "false_positive": 0,
+    "false_negative": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "completion_before_required_assessment": {
+    "truth": 1200,
+    "detected": 1200,
+    "true_positive": 1200,
+    "false_positive": 0,
+    "false_negative": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  }
+}

@@ -1,0 +1,17 @@
+# Metric definitions
+
+Implemented in `edu_synth/metrics.py`; the same code produces the ground-truth (expected) metrics from clean rows and the pipeline metrics from the raw feed.
+
+* **valid_event** - An ActivityEvent that (1) is the earliest-ingested row for its client_event_key (deduplication), (2) belongs to an existing enrollment_id (foreign key valid) and (3) has a learner-local date inside [cohort.start_date, cohort.access_end_date].
+* **local_date** - date(event_time_utc + client_tz_offset_min minutes). reported_activity_date is NOT used (known to be wrong for some rows).
+* **cohort_week_index** - floor((local_date - cohort.start_date) / 7 days). Week 0 starts on the cohort's start Monday. All cohort comparisons use cohort-relative weeks, never calendar weeks.
+* **enrolled_to_date** - Enrollments of the cohort whose enrolled_at date is <= last day of the week (late joiners count from the week they join).
+* **weekly_active_learners** - Distinct learner_id with >= 1 valid_event whose cohort_week_index = w.
+* **weekly_active_rate** - weekly_active_learners / enrolled_to_date.
+* **events_per_active_learner** - valid_events / weekly_active_learners (this is the metric duplicate events inflate).
+* **content_completions** - Distinct (enrollment, content) pairs whose FIRST completion event (video_complete | content_complete) falls in week w.
+* **assessment_submissions** - valid assessment_submit events in week w (every submission, including repeated attempts).
+* **cumulative_completion_rate** - Enrollments with CourseOutcome.completion_status = completed and completed_date_local in a week <= w, divided by enrolled_to_date. Completion follows the CompletionRule effective at cohort start (content %, all required assessments passed, weighted score %).
+* **is_complete_week** - True when the week's last day <= as_of date; incomplete weeks are excluded from comparisons.
+* **cohort_comparison_window** - First 8 cohort weeks (weeks 0-7); only cohorts with all of them complete are compared. Every cohort therefore has an identical-length window regardless of calendar start or course length.
+* **completion_rate_at_access_end** - completed / enrollments for cohorts whose access window has closed; compare only within the same duration_weeks.

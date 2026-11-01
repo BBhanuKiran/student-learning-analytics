@@ -1,0 +1,112 @@
+{
+  "generator_version": "1.0.0",
+  "command": "python -m edu_synth.generate --scale full --out /tmp/full",
+  "seed": 20261022,
+  "scale": {
+    "learners": 20000,
+    "courses": 500,
+    "enrollments": 100000,
+    "events": 2000000
+  },
+  "as_of_date": "2026-10-22",
+  "git_commit": null,
+  "environment": {
+    "python": "3.12.3",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2"
+  },
+  "injected_anomalies": {
+    "duplicates": 40000,
+    "unenrolled": 8000,
+    "tz_shift": 9760,
+    "completion_before_assessment": 1200,
+    "baseline_events": 1952000
+  },
+  "validation": {
+    "overall": "PASS",
+    "failed": 0
+  },
+  "runtime_seconds": 157.9,
+  "files": {
+    "data/learners.csv": {
+      "rows": 20000,
+      "sha256": "a2551513da5f44aea184337babfecfceec07a9e4451cc7c6af2f835fbeba9a7f",
+      "bytes": 1327587
+    },
+    "data/instructors.csv": {
+      "rows": 100,
+      "sha256": "c25916a36290cb987e68e2dcd64b3f04ef0e56f3e790a6624f39e2677daed2d0",
+      "bytes": 3557
+    },
+    "data/courses.csv": {
+      "rows": 500,
+      "sha256": "a22d20addbeb3d00e33cef3ff9d591c9385054ae083c4eaa96a7df40be701443",
+      "bytes": 52567
+    },
+    "data/cohorts.csv": {
+      "rows": 1160,
+      "sha256": "b7e73f9a5c71c6410a4b08118d0f8af4b28955beb114ff414cb36186094c81b7",
+      "bytes": 113672
+    },
+    "data/enrollments.csv": {
+      "rows": 100000,
+      "sha256": "be9563fde60def598046782210cd3eb8bb1fae4144394acf4dc2e01cc13d0db7",
+      "bytes": 12216781
+    },
+    "data/enrollment_status_history.csv": {
+      "rows": 282060,
+      "sha256": "de9d8e82e255d24271e116fecfe61f3523b2b482ed36ebb7e65af7e0181fa698",
+      "bytes": 33439514
+    },
+    "data/content_items.csv": {
+      "rows": 9741,
+      "sha256": "1e85946d1e8df9a5ccc80e741d77428a46b0cd406bb3475a4330732d1f3a1cf5",
+      "bytes": 782671
+    },
+    "data/assessments.csv": {
+      "rows": 2792,
+      "sha256": "bd0578ddb2a5eef482c4d34e9b4d798ae70507cce0fa4a865d8734d215371fcb",
+      "bytes": 255389
+    },
+    "data/attempts.csv": {
+      "rows": 397188,
+      "sha256": "d1dcec2222347571df2a05b69a0737ee938aa58f3e76a1ecdb71c25bd2a5d8fb",
+      "bytes": 54293876
+    },
+    "data/completion_rules.csv": {
+      "rows": 617,
+      "sha256": "278d4201339cf2e7ae1c6428bfb3e44a0b8d4d53597400153ca73891670d849c",
+      "bytes": 34039
+    },
+    "data/activity_events.csv": {
+      "rows": 2000000,
+      "sha256": "7208e18a22e46504cc21d5d7df332647d37eec155441e44b7c2a7494e406406b",
+      "bytes": 420250619
+    },
+    "data/course_outcomes.csv": {
+      "rows": 100000,
+      "sha256": "f7408990b69ab55a1cfe81b328ebd6bcb8a452d891a326f52226f515ec66dc6e",
+      "bytes": 21856256
+    },
+    "ground_truth/ground_truth.csv": {
+      "rows": 81243,
+      "sha256": "1202864d7c0d97093ae282ab20bf1a011a6598aa5399805964bc5903144f0790",
+      "bytes": 20429915
+    },
+    "ground_truth/latent_learner_traits.csv": {
+      "rows": 20000,
+      "sha256": "246384d6767163564ab3898895a7f75fe4a5e49333ae81d505997676f5cb8fa7",
+      "bytes": 853707
+    },
+    "ground_truth/expected_weekly_metrics.csv": {
+      "rows": 11302,
+      "sha256": "fd947fe75b5ce240cf1f2a6a3a0c879356fcd6ff8a942beb821004d8b5a9104b",
+      "bytes": 826682
+    },
+    "ground_truth/ground_truth_summary.json": {
+      "rows": 6,
+      "sha256": "4e68b02a4913479cd6a64c4aee93c6fd8b4069df16c32b3e56ec61727c78b560",
+      "bytes": 850
+    }
+  }
+}

@@ -1,0 +1,11 @@
+course_id,title,category,level,language,duration_weeks,instructor_id,course_status,created_date
+CRS-000001,Finance: Foundations 1,Finance,beginner,en,8,INS-0002,published,2025-03-16
+CRS-000002,Digital Marketing: Essentials 2,Digital Marketing,advanced,en,6,INS-0005,draft,2025-05-04
+CRS-000003,Finance: Applied Methods 3,Finance,beginner,hi,6,INS-0001,published,2025-11-28
+CRS-000004,Digital Marketing: Case Studies 4,Digital Marketing,beginner,en,6,INS-0001,archived,2025-01-05
+CRS-000005,Data Science: Practitioner Lab 5,Data Science,advanced,hi,10,INS-0003,published,2025-01-05
+CRS-000006,Cybersecurity: Fundamentals 6,Cybersecurity,beginner,en,10,INS-0002,published,2025-12-31
+CRS-000007,Cybersecurity: Strategy 7,Cybersecurity,intermediate,en,8,INS-0005,published,2025-09-16
+CRS-000008,Healthcare Informatics: Tools and Workflows 8,Healthcare Informatics,intermediate,en,6,INS-0005,archived,2025-07-27
+CRS-000009,Digital Marketing: Capstone Prep 9,Digital Marketing,intermediate,pt,6,INS-0004,published,2025-10-03
+CRS-000010,Finance: Deep Dive 10,Finance,beginner,en,8,INS-0004,published,2025-04-07
